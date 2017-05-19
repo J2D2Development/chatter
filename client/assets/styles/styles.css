@@ -1,0 +1,11 @@
+.container-margin {
+    width: 95%;
+    margin: 0px auto;
+}
+.row-flex {
+    display: flex;
+    justify-content: space-between;
+}
+.col-6 {
+    width: 49%;
+}

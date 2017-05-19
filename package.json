@@ -1,0 +1,14 @@
+{
+  "name": "chatter",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Joseph Driscoll",
+  "license": "ISC",
+  "dependencies": {
+    "websocket": "^1.0.24"
+  }
+}
