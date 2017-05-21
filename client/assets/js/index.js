@@ -19,13 +19,28 @@
         }
 
         connection.onmessage = function(message) {
-            console.log('message!', message);
-            const data = JSON.parse(message.data).data;
-            console.log(data.text);
+            const json = JSON.parse(message.data);
+            const type = json.type;
+            const data = json.data;
+            if(type === 'history') {
+                data.forEach(d => {
+                    const historyJson = JSON.parse(d);
+                    addPost(historyJson.data);
+                });
+            } else {
+                addPost(data);
+            }
+        }
+
+        function addPost(data) {
             messagesWrapper.innerHTML += `
-                <p>${data.text}</p>
-                <em>${data.author}</em>
-            `;
+                    <div class="message-wrapper">
+                        <div class="message-text">${data.text}</div>
+                        <div class="message-footer">
+                            <div class="message-author">${data.author}</div>
+                            <div class="message-time">${data.time}</div>
+                    </div>
+                `;
         }
 
         talkSubmit.addEventListener('click', function() {
