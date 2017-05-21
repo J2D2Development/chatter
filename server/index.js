@@ -141,5 +141,5 @@ server.on('request', (req, res) => {
 server.on('error', err => console.error(err));
 
 server.listen(port, () => {
-    console.log('server listening!');
+    console.log('http server running on port', port);
 });
