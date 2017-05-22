@@ -8,33 +8,26 @@
         <meta name="description" content="Chatter">
         <meta name="author" content="J2D2">
 
-        <link rel="stylesheet" href="./assets/styles/styles.css">
+        <link rel="stylesheet" href="./dist/main.bundle.css">
         <!--[if lt IE 9]>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
         <![endif]-->
     </head>
 
     <body>
-        <h1>Hello there</h1>
-        
-        <div class="container-margin">
-            <div class="row-flex">
-                <div class="col-6">
-                    <p>
-                        We will need an input field to test the socket<br />
-                        <input type="text" id="talk-content" placeholder="Type to talk" />
-                        <button type="button" id="talk-submit">Submit</button>
-                    </p>
-                </div>
-                <div class="col-6">
-                    <p>And a place for messages to appear</p>
-                    <div>
-                        <div id="messages-wrapper">Messages...</div>
-                    </div>
-                </div>
+        <div class="form-wrapper">
+            <div class="internal-wrapper">
+                <div class="form" id="login"></div>
+                <div class="form hidden" id="sign-up"></div>
+            </div>
+            <div class="button-wrapper">
+                <button id="login-form" class="active-button">
+                Log In
+            </button>
+                <span>Or</span>
+                <button id="sign-up-form">Sign Up</button>
             </div>
         </div>
-
-        <script src="./assets/js/index.js"></script>
+        <script src="./dist/bundle.js"></script>
     </body>
 </html>

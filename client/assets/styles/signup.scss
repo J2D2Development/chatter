@@ -1,0 +1,113 @@
+@import './variables.scss';
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100%;
+}
+.internal-wrapper {
+  position: relative;
+  overflow: hidden;
+  min-width: 450px;
+  min-height: 325px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: $bg-light;
+  border-radius: 5px;
+  margin-bottom: 2rem;
+}
+.form {
+  padding: 1rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  
+  input {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    border: none;
+    color: $font-default;
+    background-color: $bg-light;
+    border-bottom: 1px solid #aaa;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #333;
+  }
+}
+.hidden {
+  transform: translateX(100%);
+}
+
+button {
+  background-color: $gray-dark;
+  color: $bg-light;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+.submit {
+  background-color: $teal-dark;
+  color: $teal-light;
+}
+.cancel {
+  background-color: $red-dark;
+  color: $red-light;
+}
+
+.button-wrapper {
+  button {
+    margin: 0 1rem;
+    border: 1px solid transparent;
+    opacity: 0.6;
+  }
+  button:focus {
+    outline: none;
+  }
+  span {
+    font-size: 1.5rem;
+    color: $bg-light;
+  }
+  .active-button {
+    border: 1px solid $teal-main;
+    opacity: 1;
+  }
+}
+
+.instructions {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: absolute;
+  font-size: 0.75rem;
+  padding: 6px;
+  font-style: italic;
+  background-color: #ccc;
+}
+.title {
+  position: absolute;
+  top: 0;
+  padding: 6px;
+  background-color: #ccc;
+  border-bottom-left-radius: 5px;
+  font-size: 1.2rem;
+}
+.title-left {
+  left: 0;
+}
+.title-right {
+  right: 0;
+}

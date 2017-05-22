@@ -5,11 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "node ./server/index.js"
+    "start": "node ./server/index.js",
+    "webpack": "./node_modules/.bin/webpack"
   },
   "author": "Joseph Driscoll",
   "license": "ISC",
   "dependencies": {
     "websocket": "^1.0.24"
+  },
+  "devDependencies": {
+    "css-loader": "^0.28.1",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.5",
+    "webpack": "^2.5.1"
   }
 }

@@ -129,10 +129,15 @@ server.on('request', (req, res) => {
             if(err) {
                 console.error(err);
                 res.writeHead(500, { 'Content-Type': 'text/html' });
-                return res.end(`<h1>Not Found!</h1>${err}`);
+                return res.end(`<h1>Server Error</h1>${err}`);
             }
             const ext = path.parse(pathName).ext;
-            res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'text/plain' });
+
+            if(parsedUrl.path === '/chat-index.html') {
+                console.log('we need to authenticate here!');
+            }
+
+            res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'text/html' });
             return res.end(data);
         });
     });

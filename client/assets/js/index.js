@@ -1,64 +1,70 @@
-(function(window) {
-    'use strict';
-    window.addEventListener('DOMContentLoaded', function() {
-        const talkContent = document.querySelector('#talk-content');
-        const talkSubmit = document.querySelector('#talk-submit');
-        const messagesWrapper = document.querySelector('#messages-wrapper');
+'use strict';
+//add data validation: https://www.npmjs.com/package/joi
 
-        if(!window.WebSocket) {
-            alert('Sorry, your browser does not support web sockets!');
-        }
+import { Form } from './sign-up';
 
-        const connection = new WebSocket('ws://localhost:1337/server');
-        connection.onopen = function() {
-            console.log('connection open?');
-        }
+window.addEventListener('DOMContentLoaded', init);
 
-        connection.onerror = function(err) {
-            console.log('connection error:', err);
-        }
+function init() {
+    const login = document.querySelector('#login')
+    const signUp = document.querySelector('#sign-up');
+    const loginFormShow = document.querySelector('#login-form');
+    const signupFormShow = document.querySelector('#sign-up-form');
 
-        connection.onmessage = function(message) {
-            const json = JSON.parse(message.data);
-            const type = json.type;
-            const data = json.data;
-            if(type === 'history') {
-                data.forEach(d => {
-                    const historyJson = JSON.parse(d);
-                    addPost(historyJson.data);
-                });
-            } else {
-                addPost(data);
-            }
-        }
-
-        function addPost(data) {
-            messagesWrapper.innerHTML += `
-                    <div class="message-wrapper">
-                        <div class="message-text">${data.text}</div>
-                        <div class="message-footer">
-                            <div class="message-author">${data.author}</div>
-                            <div class="message-time">${data.time}</div>
-                    </div>
-                `;
-        }
-
-        talkSubmit.addEventListener('click', function() {
-            const message = talkContent.value;
-            if(message) { submitMessage(message); }
-        }, false);
-
-        talkContent.addEventListener('keyup', function(evt) {
-            if(evt.keyCode === 13) {
-                const message = talkContent.value;
-                if(message) { submitMessage(message); }
-            }
-        });
-
-        function submitMessage(msg) {
-            //messagesWrapper.innerHTML += `<p>${msg}</p>`;
-            connection.send(msg);
-            talkContent.value = '';
+    loginFormShow.addEventListener('click', () => {
+        if(login.classList.contains('hidden')) {
+        login.classList.remove('hidden');
+        loginFormShow.classList.add('active-button');
+        signUp.classList.add('hidden');
+        signupFormShow.classList.remove('active-button');
         }
     });
-})(window);
+
+    signupFormShow.addEventListener('click', () => {
+        if(signUp.classList.contains('hidden')) {
+        signUp.classList.remove('hidden');
+        signupFormShow.classList.add('active-button');
+        login.classList.add('hidden');
+        loginFormShow.classList.remove('active-button');
+        
+        }
+    });
+
+    const loginFields = [
+        {type: 'text', id: 'username', placeholder: 'email'},
+        {type: 'text', id: 'password', placeholder: 'password'}
+    ];
+
+    const signUpFields = [
+        {type: 'text', placeholder: 'email'}
+    ];
+
+    const buttons = [
+        {type: 'submit', title: 'Submit', class: 'submit'},
+        {thype: 'cancel', title: 'Cancel', class: 'cancel'}
+    ];
+
+    const loginForm = new Form({
+        url: './processors/submit-login.js', 
+        inputs: loginFields,
+        buttons: buttons, 
+        title: {
+        text: 'Log In',
+        class: 'title-right'
+        },
+        instructions: 'Forgot your info?  Contact Us!'
+    });
+    const signUpForm = new Form({
+        url: './processors/submit-signup.js', 
+        inputs: signUpFields, 
+        buttons: buttons,
+        title: {
+        text: 'Sign Up',
+        class: 'title-left'
+        },
+        instructions: 'New to our service?  Just provide an email address and we will get in touch!'
+    });
+
+    login.innerHTML = loginForm.createFormHtml();
+    signUp.innerHTML = signUpForm.createFormHtml();
+}
