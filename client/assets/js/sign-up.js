@@ -58,7 +58,7 @@ export class Form {
     }
     
     return `
-      <form onSubmit="${submit}">${inputHtml}</form>
+      <form onSubmit="submit">${inputHtml}</form>
     `;
   }
 
